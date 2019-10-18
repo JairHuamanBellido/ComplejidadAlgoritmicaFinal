@@ -1,53 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700&display=swap');
+
 body {
 	margin: 0;
 	background-color: #000;
-	color: #fff;
+
 	font-family: Monospace;
 	font-size: 13px;
 	line-height: 24px;
 }
-
-a {
-	color: #ff0;
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-button {
-	cursor: pointer;
-	text-transform: uppercase;
-}
-
-canvas {
-	display: block;
-}
-
-#info {
-	position: absolute;
-	top: 0px;
-	width: 100%;
-	padding: 10px;
+*{
+	font-family: 'Nunito Sans', sans-serif;
 	box-sizing: border-box;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	pointer-events: none;
-	z-index: 1; /* TODO Solve this in HTML */
 }
 
-a, button, input, select {
-	pointer-events: auto;
+
+
+
+#addCube-container{
+	position: absolute;
+	bottom: 0%;
+
+	width: 100vw;
+	height: 100px;
+	
+
+	transition: all .2s ease-in-out;
 }
 
-.dg.ac {
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	z-index: 2 !important; /* TODO Solve this in HTML */
+#addCube-container button.add{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	background: rgb(255, 85, 102);
+	color: #fff;
+	width: 200px;
+	padding: 18px 24px;
+	border-radius: 6px;
+	border: none;
+	box-shadow: 0 18px 24px 3px rgba(255, 85, 102,.3);
+	transition: all .2s ease-out;
+	cursor: pointer;
+	opacity: 1;
+	font-weight: 600;
+}
+#addCube-container .container{
+	width: 100%;
+	height: 100%;
+	background: #ffffff;
+	border-radius: 18px 18px 0 0;
+
+}
+#addCube-container button.add:active{
+
+	transform:scale(.96);
+}
+
+#content-cubeContainer{
+	display: none;
+}
+
+
+#addCube-container button.close{
+	background: #fff;
+	color: #000;
+	border: none;
+	font-size: 18px;
+	opacity: .5;
+	position: absolute;
+	top: 15%;
+	right: 5%;
+	transform: translate(-5%,-15%);
+	transition: all .2s ease-in-out;
+	display: none;
+}
+#addCube-container button.close:hover{
+	opacity: 1;
+}
+
+
+
+#content-cubeContainer{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+
 }
