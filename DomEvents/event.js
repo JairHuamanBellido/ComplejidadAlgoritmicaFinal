@@ -1,7 +1,7 @@
 import escena from "../Figuras/Scene.js";
 import { Cube } from "../Figuras/Cube.js";
 
-
+let color_picker_wrapper = document.getElementById("color-picker-wrapper");
 let bottomContainer = document.getElementById("addCube-container");
 let btn_open = document.getElementById("btn-open");
 let btn_close = document.getElementById("btn-close");
@@ -15,11 +15,16 @@ window.onload = () => {
     h.value = "";
     w.value = "";
     d.value = "";
-    console.log("asd");
+    
 }
 
 let startX = 0;
 let startY = 0;
+
+color.onchange = function() {
+	color_picker_wrapper.style.backgroundColor = color.value;    
+}
+color_picker_wrapper.style.backgroundColor = color.value;
 
 
 

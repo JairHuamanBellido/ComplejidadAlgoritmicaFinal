@@ -11,6 +11,7 @@ body {
 *{
 	font-family: 'Nunito Sans', sans-serif;
 	box-sizing: border-box;
+	outline: none;
 }
 
 
@@ -57,7 +58,13 @@ body {
 	border-radius: 18px 18px 0 0;
 
 }
+input[type="color"] {
+	opacity: 0;
+	display: block;
 
+	height: 32px;
+	border: none;
+}
 #btn-submit{
 	background: rgb(255, 85, 102);
 	color: #fff;

@@ -1,85 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>three.js webgl - orbit controls</title>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-		/>
-		<link type="text/css" rel="stylesheet" href="main.css" />
-		<style>
-			body {
-				background-color: #ccc;
-				color: #000;
-			}
 
-			a {
-				color: #f00;
-			}
-			</style>
-	</head>
-	
-	<body>
-		
-		<script src="../DomEvents/event.js" type="module"></script>
-		
-		<div id="info">
-			<h1 style="color:#ffffff">Trabajo Final Complejidad</h1>
-		
-		</div>
-		<div id="container"></div>
-		<div id="addCube-container">
-			<div class="container">
-				<div id="content-cubeContainer">
-					
-					<div class="sub">
-						<div class="field">
-							<label>Ancho</label>
-							<input
-								type="number"
-								id="field-w"
-								placeholder="Ingrese el ancho"
-							
-							/>
-						</div>
-						<div class="field">
-							<label for="">Alto</label>
-							<input type="number" id="field-h" placeholder="Ingrese el alto" />
-						</div>
-						<div class="field">
-							<label for="">Fondo</label>
-							<input
-								type="number"
-								id="field-d"
-								placeholder="Ingrese el fondo"
-								value="2"
-							/>
-						</div>
+<head>
+	<title>three.js webgl - orbit controls</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+	<link type="text/css" rel="stylesheet" href="main.css" />
+	<style>
+		body {
+			background-color: #ccc;
+			color: #000;
+		}
 
-						<div class="field">
-							<label >Color</label>
-							<input type="color" name="name" id="color-id">
-						</div>
+		a {
+			color: #f00;
+		}
+	</style>
+</head>
 
-						<div class="submit">
-							<button id="btn-submit" >Agregar</button>
+<body>
+
+	<script src="../DomEvents/event.js" type="module"></script>
+
+	<div id="info">
+		<h1 style="color:#ffffff">Trabajo Final Complejidad</h1>
+
+	</div>
+	<div id="container"></div>
+	<div id="addCube-container">
+		<div class="container">
+			<div id="content-cubeContainer">
+
+				<div class="sub">
+					<div class="field">
+						<label>Ancho</label>
+						<input type="number" id="field-w" placeholder="Ingrese el ancho" />
+					</div>
+					<div class="field">
+						<label for="">Alto</label>
+						<input type="number" id="field-h" placeholder="Ingrese el alto" />
+					</div>
+					<div class="field">
+						<label for="">Fondo</label>
+						<input type="number" id="field-d" placeholder="Ingrese el fondo" value="2" />
+					</div>
+
+					<div class="field">
+						<label>Color</label>
+						<div id="color-picker-wrapper">
+							<input type="color" value="#ff0000" id="color-id">
 						</div>
 					</div>
-				</div>
 
-				<div class="controls">
-					<button class="add" id="btn-open">
-						Add Cube
-					</button>
-					<button class="close" id="btn-close">
-						Cerrar
-					</button>
+					<div class="submit">
+						<button id="btn-submit">Agregar</button>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<script src="./main.js" type="module"></script>
-		
-	</body>
+			<div class="controls">
+				<button class="add" id="btn-open">
+					Add Cube
+				</button>
+				<button class="close" id="btn-close">
+					Cerrar
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<script src="./main.js" type="module"></script>
+
+</body>
+
 </html>
