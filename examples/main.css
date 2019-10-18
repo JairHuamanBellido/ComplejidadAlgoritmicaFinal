@@ -2,7 +2,7 @@
 
 body {
 	margin: 0;
-	background-color: #000;
+
 
 	font-family: Monospace;
 	font-size: 13px;
@@ -14,7 +14,13 @@ body {
 }
 
 
-
+#info{
+	background: transparent;
+	position: absolute;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
 
 #addCube-container{
 	position: absolute;
@@ -51,10 +57,23 @@ body {
 	border-radius: 18px 18px 0 0;
 
 }
-#addCube-container button.add:active{
 
-	transform:scale(.96);
+#btn-submit{
+	background: rgb(255, 85, 102);
+	color: #fff;
+	width: 200px;
+	padding: 18px 24px;
+	border-radius: 6px;
+	border: none;
+	box-shadow: 0 18px 24px 3px rgba(255, 85, 102,.3);
+	transition: all .2s ease-out;
+	cursor: pointer;
+	opacity: 1;
+	font-size: 20px;
+	
+	font-weight: 600;
 }
+
 
 #content-cubeContainer{
 	display: none;
@@ -86,4 +105,34 @@ body {
 	left: 50%;
 	transform: translate(-50%,-50%);
 
+}
+
+.sub{
+	display: flex;
+	flex-direction: column;
+}
+
+.field{
+	display: flex;
+	flex-direction: column;
+	margin: 1em 0;
+}
+.field label{
+	font-size: 18px;
+	color: #434343;
+}
+
+.field input{
+	width: 200px;
+	font-size: 18px;
+	color: #000000;
+	border-radius: 6px;
+	font-weight: 600;
+	padding: 12px;
+	border: 1px solid #bfbfbf;
+	transition: all .2s ease-in;
+}
+
+.field input:focus{
+	border: 1px solid rgb(255, 85, 102);
 }

@@ -2,10 +2,13 @@ import * as THREE from "../build/three.module.js";
 
 
 export class Ground{
-    constructor(w,h,d,color){
-        this.geometry =  new THREE.BoxBufferGeometry(w,h,d);
+    constructor(w,h,color){
+        this.geometry =  new THREE.PlaneBufferGeometry(w,h);
         this.material =  new THREE.MeshLambertMaterial({color:color});
+        this.material.color.setHSL( 0.095, 1, 0.75 );
         this.ground =  new THREE.Mesh(this.geometry,this.material);
+        this.ground.receiveShadow = true;
+        this.ground.rotation.x = - Math.PI / 2;
     }
 
     setPosition(y){

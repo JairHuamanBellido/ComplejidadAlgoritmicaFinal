@@ -17,50 +17,62 @@
 			a {
 				color: #f00;
 			}
-		</style>
+			</style>
 	</head>
-
+	
 	<body>
+		
+		<script src="../DomEvents/event.js" type="module"></script>
+		
 		<div id="info">
 			<h1 style="color:#ffffff">Trabajo Final Complejidad</h1>
+		
 		</div>
-
+		<div id="container"></div>
 		<div id="addCube-container">
 			<div class="container">
 				<div id="content-cubeContainer">
+					
 					<div class="sub">
 						<div class="field">
-							<label for="">Ancho</label>
+							<label>Ancho</label>
 							<input
-								type="text"
+								type="number"
 								id="field-w"
 								placeholder="Ingrese el ancho"
+							
 							/>
 						</div>
 						<div class="field">
 							<label for="">Alto</label>
-							<input type="text" id="field-h" placeholder="Ingrese el alto" />
+							<input type="number" id="field-h" placeholder="Ingrese el alto" />
 						</div>
 						<div class="field">
 							<label for="">Fondo</label>
 							<input
-								type="text"
+								type="number"
 								id="field-d"
 								placeholder="Ingrese el fondo"
+								value="2"
 							/>
 						</div>
 
+						<div class="field">
+							<label >Color</label>
+							<input type="color" name="name" id="color-id">
+						</div>
+
 						<div class="submit">
-							<button onclick="Agregar()">Agregar</button>
+							<button id="btn-submit" >Agregar</button>
 						</div>
 					</div>
 				</div>
 
 				<div class="controls">
-					<button class="add" id="btn-open" onclick="show(this)">
+					<button class="add" id="btn-open">
 						Add Cube
 					</button>
-					<button class="close" id="btn-close" onclick="closeContainer(this)">
+					<button class="close" id="btn-close">
 						Cerrar
 					</button>
 				</div>
@@ -68,6 +80,6 @@
 		</div>
 
 		<script src="./main.js" type="module"></script>
-		<script src="../DomEvents/event.js"></script>
+		
 	</body>
 </html>
