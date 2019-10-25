@@ -99,7 +99,7 @@ submitButton.addEventListener("click", () => {
 
 
     console.log(`Volumen Disponible: ${volumenDisponible} m3`)
-    console.log(`Volumen ocupado: ${volumenOcupado} m3 (${parseFloat(volumenOcupado/volumenDisponible).toFixed(2)*100})%`);
+    console.log(`Volumen ocupado: ${volumenOcupado} m3 (${(parseFloat(volumenOcupado/volumenDisponible)*100).toFixed(2)})%`);
     
     document.getElementById("modal-rules").style.display="none";
 })
