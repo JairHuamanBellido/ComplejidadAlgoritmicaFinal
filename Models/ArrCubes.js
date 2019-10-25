@@ -1,4 +1,4 @@
-export default class ArrCubes{
+export  class ArrCubes{
     constructor(){
         this.arr = []
     }
@@ -12,3 +12,5 @@ export default class ArrCubes{
         return this.arr;
     }
 }
+
+
