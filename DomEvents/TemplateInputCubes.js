@@ -92,15 +92,14 @@ submitButton.addEventListener("click", () => {
         let {width,height,depth} = cube.geometry.parameters;
         let alt =  width * height * depth;
         volumenOcupado = volumenOcupado + alt;
-     //   console.log(volumenOcupado)
-        
+
         
     }
 
 
 
     console.log(`Volumen Disponible: ${volumenDisponible} m3`)
-    console.log(`Volumen ocupado: ${volumenOcupado} m3 (${parseFloat(volumenOcupado/volumenDisponible).toFixed(2)})%`);
+    console.log(`Volumen ocupado: ${volumenOcupado} m3 (${parseFloat(volumenOcupado/volumenDisponible).toFixed(2)*100})%`);
     
     document.getElementById("modal-rules").style.display="none";
 })
