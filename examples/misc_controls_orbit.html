@@ -20,8 +20,43 @@
 
 <body>
 
-	<script src="../DomEvents/event.js" type="module"></script>
+	<script src="../DomEvents/addCubeEvent.js" type="module"></script>
+	<div id="modal-rules">
+		<div class="modal-container">
+			<h1>Creacion de datos</h1>
 
+			<div class="field-fatherCube">
+				<p>Ingrese los datos del contenedor</p>
+				<div class="field">
+					<label>Ancho</label>
+					<input type="text" id="father-w" placeholder="Ingrese la altura del cubo">
+				</div>
+				<div class="field">
+					<label>Largo</label>
+					<input type="text" id="father-d" placeholder="Ingrese la altura del cubo">
+				</div>
+				<div class="field">
+					<label>Alto</label>
+					<input type="text" id="father-h" placeholder="Ingrese la altura del cubo">
+				</div>
+				
+			</div>
+
+			<div class="categoryCubes">
+				<div class="field">
+					<label >Cuantos tipos de cubos</label>
+					<input type="text" id="numberCategoryCubes">
+				</div>
+			</div>
+			
+			<div id="template-input">
+
+			</div>
+			<div class="container-button">
+				<button id="btn-create">Crear</button>
+			</div>
+		</div>
+	</div>
 	<div id="info">
 		<h1 style="color:#ffffff">Trabajo Final Complejidad</h1>
 
@@ -29,6 +64,7 @@
 	<div id="container"></div>
 	<div id="addCube-container">
 		<div class="container">
+
 			<div id="content-cubeContainer">
 
 				<div class="sub">
@@ -70,6 +106,7 @@
 	</div>
 
 	<script src="./main.js" type="module"></script>
+	<script src="../DomEvents/TemplateInputCubes.js" type="module"></script>
 
 </body>
 

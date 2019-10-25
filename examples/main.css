@@ -15,6 +15,26 @@ body {
 }
 
 
+#modal-rules{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0,0,0,.61);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#modal-rules .modal-container{
+	width: 500px;
+	height: 700px;
+	background: #ffffff;
+	z-index: 9999;
+	border-radius: 6px;
+	overflow: auto;
+}
+
 #info{
 	background: transparent;
 	position: absolute;
@@ -26,7 +46,7 @@ body {
 #addCube-container{
 	position: absolute;
 	bottom: 0%;
-
+	display: none;
 	width: 100vw;
 	height: 100px;
 	
@@ -58,13 +78,7 @@ body {
 	border-radius: 18px 18px 0 0;
 
 }
-input[type="color"] {
-	opacity: 0;
-	display: block;
 
-	height: 32px;
-	border: none;
-}
 #btn-submit{
 	background: rgb(255, 85, 102);
 	color: #fff;
@@ -82,7 +96,7 @@ input[type="color"] {
 }
 
 
-#content-cubeContainer{
+#content-cubeContainer,#content-Box{
 	display: none;
 }
 

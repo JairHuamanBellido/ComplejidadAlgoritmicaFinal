@@ -9,9 +9,9 @@ import * as THREE from "../build/three.module.js";
 import { Cube } from '../Figuras/Cube.js';
 import { ShadowMesh } from "./jsm/objects/ShadowMesh.js";
 import { OrbitControls } from "./jsm/controls/OrbitControls.js";
-import { GUI } from './jsm/libs/dat.gui.module.js';
-import escena from "../Figuras/Scene.js";
 
+import escena from "../Figuras/Scene.js";
+import {  ContainerCube} from "../Figuras/Container.js";
 
 var hemiLight;
 
@@ -38,11 +38,11 @@ function init() {
 	hemiLight.position.set(0, 50, 0);
 	escena.add(hemiLight);
 	// light
-	var light = new THREE.DirectionalLight(0xffffff);
-	light.position.set(100, 100, 90);
+	// var light = new THREE.DirectionalLight(0xffffff);
+	// light.position.set(100, 100, 90);
 
-
-	//escena.add(light);
+	
+	// escena.add(light);
 
 	renderer = new THREE.WebGLRenderer({ antialias: true });
 	renderer.setPixelRatio(window.devicePixelRatio);
@@ -55,13 +55,17 @@ function init() {
 	// controls
 	var controls = new OrbitControls(camera, renderer.domElement);
 	controls.maxPolarAngle = Math.PI * 0.5;
-	controls.minDistance = 200;
+	controls.minDistance = 2;
 	controls.maxDistance = 800000;
 
 
-	let ground = new Ground(1000,1000,'#22aaff');
+	let ground = new Ground(1000,1000,'#000000');
 	ground.setPosition(0.0)
 	escena.add(ground.getModel());
+
+	// let jail = new ContainerCube(20,20,20,'#000000');
+	// jail.setPosition(0,20,0);
+	// escena.add(jail.getModel());
 
 	
 
