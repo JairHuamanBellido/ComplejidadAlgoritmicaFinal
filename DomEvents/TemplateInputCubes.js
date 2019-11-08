@@ -1,6 +1,7 @@
 import { ContainerCube } from "../Figuras/Container.js";
 import { Cube } from "../Figuras/Cube.js";
 import escena from "../Figuras/Scene.js";
+import { jumpLineZ,sortByWidthDepth } from "./Algorithms.js";
 import { ArrCubes } from "../Models/ArrCubes.js";
 let inputCategory = document.getElementById("numberCategoryCubes");
 let templateInput = document.getElementById("template-input");
@@ -11,6 +12,20 @@ let wFather = document.getElementById("father-w");
 let hFather = document.getElementById("father-h");
 let dFather = document.getElementById("father-d");
 
+let btnAlgorithmJair = document.getElementById("algorithm-jair");
+
+
+let limits = {
+    x: null,
+    y: null,
+    z: null
+}
+
+let tracker = {
+    x:-10,
+    z:-10,
+    zaux: -10
+};
 
 let arr_cubes = new ArrCubes();
 
@@ -19,24 +34,24 @@ let x = 0;
 function templateFormInputCubes(category) {
     let cc = document.createElement('div');
     cc.innerHTML = `
-        <div class="field-container">
-            <h2>Cubo ${category} </h2>
+    <div class="field-container">
+    <h2>Cubo ${category} </h2>
             
-            <input type="number" id="${category}count" placeholder="Ingrese la cantidad de cubos"/>
-            
-            <div class="parameters">
-
-            <input type="number" id="${category}-w" />
-            <input type="number" id="${category}-h" />
-            <input type="number" id="${category}-d" />
-
-            </div>
-
-            <div class="color-picker-wrapper">
-				<input type="color" value="#ff0000" id="color-${category}">
+    <input type="number" id="${category}count" placeholder="Ingrese la cantidad de cubos"/>
+    
+    <div class="parameters">
+    
+    <input type="number" id="${category}-w" />
+    <input type="number" id="${category}-h" />
+    <input type="number" id="${category}-d" />
+    
+    </div>
+    
+    <div class="color-picker-wrapper">
+    <input type="color" value="#ff0000" id="color-${category}">
 			</div>
-        </div>
-    `;
+            </div>
+            `;
     templateInput.appendChild(cc);
 }
 
@@ -56,12 +71,18 @@ submitButton.addEventListener("click", () => {
     let wc = parseInt(wFather.value);
     let hc = parseInt(hFather.value);
     let dc = parseInt(dFather.value);
-    let containerCube =  new ContainerCube(wc,hc,dc,'#000000');
-    containerCube.setPosition(0,hc/2,0);
+    let containerCube = new ContainerCube(wc, hc, dc, '#000000');
+    containerCube.setPosition(0, hc / 2, 0);
     escena.add(containerCube.getModel());
 
-    
-	
+    limits.x = wc/2;
+    limits.z = dc/2;
+    limits.y =  hc*2;
+
+    tracker.x = -wc/2;
+    tracker.z = -dc/2;
+    tracker.zaux = -dc/2;
+
     for (let i = 0; i < countCategory; i++) {
 
         let parameters = {
@@ -71,35 +92,64 @@ submitButton.addEventListener("click", () => {
             h: parseInt(document.getElementById(`${i}-h`).value),
             d: parseInt(document.getElementById(`${i}-d`).value)
         }
-        x+=parameters.w;
         for (let j = 0; j < parseInt(parameters.numberCubes); ++j) {
-            let newCube = new Cube(parameters.w,parameters.h,parameters.d,parameters.color);
-            newCube.setPosition(x,parameters.h/2,0);
-            escena.add(newCube.getModel());
-            arr_cubes.add(newCube); 
+            console.log("x:" + x);
 
-            x+=(parameters.w + 2);
+            let newCube = new Cube(parameters.w, parameters.h, parameters.d, parameters.color);
+            newCube.setPosition(x, parameters.h / 2, 0);
+            escena.add(newCube.getModel());
+            arr_cubes.add(newCube);
+            x += (parameters.w)
+            x += 0.3;
+
 
 
         }
 
+
     }
-    let volumenDisponible = 
-        wc*hc*dc
-    ;
+    let volumenDisponible =
+        wc * hc * dc
+        ;
     let volumenOcupado = 0;
     for (let cube of arr_cubes.getArr()) {
-        let {width,height,depth} = cube.geometry.parameters;
-        let alt =  width * height * depth;
+        let { width, height, depth } = cube.geometry.parameters;
+        let alt = width * height * depth;
         volumenOcupado = volumenOcupado + alt;
 
-        
+
     }
 
 
 
     console.log(`Volumen Disponible: ${volumenDisponible} m3`)
-    console.log(`Volumen ocupado: ${volumenOcupado} m3 (${(parseFloat(volumenOcupado/volumenDisponible)*100).toFixed(2)})%`);
+    console.log(`Volumen ocupado: ${volumenOcupado} m3 (${(parseFloat(volumenOcupado / volumenDisponible) * 100).toFixed(2)})%`);
+
+    document.getElementById("modal-rules").style.display = "none";
+})
+
+btnAlgorithmJair.addEventListener("click", () => {
     
-    document.getElementById("modal-rules").style.display="none";
+    //console.log(arr_cubes.arr);
+    arr_cubes.arr.sort((a, b) => ((a.w*a.d)  < (b.w *b.d)  ) ? 1 : -1)
+    console.log(arr_cubes.arr);
+    for (let i = 0; i < arr_cubes.arr.length; i++) {
+        let cube =  arr_cubes.arr[i];
+        
+        if(tracker.x + cube.w > limits.x){
+            tracker.x = - 10;
+            
+            
+            tracker.z =  jumpLineZ(arr_cubes,tracker.zaux);
+            tracker.z +=0.133;
+            console.log(jumpLineZ(arr_cubes,tracker.zaux));
+
+
+        }
+
+        arr_cubes.arr[i].setPosition(tracker.x+cube.w/2,cube.h/2,tracker.z+cube.d/2);
+        tracker.x+=(cube.w+0.133);
+        tracker.zaux =  tracker.z+ (cube.d/2)   
+
+    }
 })
