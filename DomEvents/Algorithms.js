@@ -18,3 +18,13 @@ export const sortByWidthDepth = (arrcubes) => {
 
     return arrcubes.arr.sort((a, b) => (a.x * a.z < b.x * b.z) ? 1 : -1)
 }
+
+
+export const findSpaceUpLevel = (arrcubes,trackedCube) => {
+   
+    let newHeight = trackedCube.y + (trackedCube.h /2);
+   
+
+
+    return newHeight;
+}

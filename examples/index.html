@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>three.js webgl - orbit controls</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+	<link type="text/css" rel="stylesheet" href="main.css" />
+	<style>
+		body {
+			background-color: #ccc;
+			color: #000;
+		}
+
+		a {
+			color: #f00;
+		}
+	</style>
+</head>
+
+<body>
+
+	<script src="../DomEvents/addCubeEvent.js" type="module"></script>
+	<div id="modal-rules">
+		<div class="modal-container">
+			<h1>Creacion de datos</h1>
+
+			<div class="field-fatherCube">
+				<p>Ingrese los datos del contenedor</p>
+				<div class="field">
+					<label>Ancho</label>
+					<input type="text" id="father-w" placeholder="Ingrese la altura del cubo">
+				</div>
+				<div class="field">
+					<label>Largo</label>
+					<input type="text" id="father-d" placeholder="Ingrese la altura del cubo">
+				</div>
+				<div class="field">
+					<label>Alto</label>
+					<input type="text" id="father-h" placeholder="Ingrese la altura del cubo">
+				</div>
+				
+			</div>
+
+			<div class="categoryCubes">
+				<div class="field">
+					<label >Cuantos tipos de cubos</label>
+					<input type="text" id="numberCategoryCubes">
+				</div>
+			</div>
+			
+			<div id="template-input">
+
+			</div>
+			<div class="container-button">
+				<button id="btn-create">Crear</button>
+			</div>
+		</div>
+	</div>
+	<div id="info">
+		<h1 style="color:#ffffff">Trabajo Final Complejidad</h1>
+
+	</div>
+	<div id="container"></div>
+	<div id="addCube-container">
+		<div class="container">
+
+			
+
+			<div class="controls">
+				<button class="add" style="font-size: 20px;" id="algorithm-jair">
+					Algoritmo Jair
+				</button>
+			
+			</div>
+		</div>
+	</div>
+
+	<script src="./main.js" type="module"></script>
+	<script src="../DomEvents/TemplateInputCubes.js" type="module"></script>
+
+</body>
+
+</html>

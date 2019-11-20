@@ -1,7 +1,7 @@
 import { ContainerCube } from "../Figuras/Container.js";
 import { Cube } from "../Figuras/Cube.js";
 import escena from "../Figuras/Scene.js";
-import { jumpLineZ,sortByWidthDepth } from "./Algorithms.js";
+import { jumpLineZ, sortByWidthDepth, findSpaceUpLevel } from "./Algorithms.js";
 import { ArrCubes } from "../Models/ArrCubes.js";
 let inputCategory = document.getElementById("numberCategoryCubes");
 let templateInput = document.getElementById("template-input");
@@ -13,7 +13,7 @@ let hFather = document.getElementById("father-h");
 let dFather = document.getElementById("father-d");
 
 let btnAlgorithmJair = document.getElementById("algorithm-jair");
-
+let lastCUBETRACKED = null;
 
 let limits = {
     x: null,
@@ -22,8 +22,9 @@ let limits = {
 }
 
 let tracker = {
-    x:-10,
-    z:-10,
+    x: -10,
+    z: -10,
+    y:0,
     zaux: -10
 };
 
@@ -75,13 +76,13 @@ submitButton.addEventListener("click", () => {
     containerCube.setPosition(0, hc / 2, 0);
     escena.add(containerCube.getModel());
 
-    limits.x = wc/2;
-    limits.z = dc/2;
-    limits.y =  hc*2;
+    limits.x = wc / 2;
+    limits.z = dc / 2;
+    limits.y = hc * 2;
 
-    tracker.x = -wc/2;
-    tracker.z = -dc/2;
-    tracker.zaux = -dc/2;
+    tracker.x = -wc / 2;
+    tracker.z = -dc / 2;
+    tracker.zaux = -dc / 2;
 
     for (let i = 0; i < countCategory; i++) {
 
@@ -93,7 +94,7 @@ submitButton.addEventListener("click", () => {
             d: parseInt(document.getElementById(`${i}-d`).value)
         }
         for (let j = 0; j < parseInt(parameters.numberCubes); ++j) {
-            console.log("x:" + x);
+            
 
             let newCube = new Cube(parameters.w, parameters.h, parameters.d, parameters.color);
             newCube.setPosition(x, parameters.h / 2, 0);
@@ -101,11 +102,7 @@ submitButton.addEventListener("click", () => {
             arr_cubes.add(newCube);
             x += (parameters.w)
             x += 0.3;
-
-
-
         }
-
 
     }
     let volumenDisponible =
@@ -116,11 +113,7 @@ submitButton.addEventListener("click", () => {
         let { width, height, depth } = cube.geometry.parameters;
         let alt = width * height * depth;
         volumenOcupado = volumenOcupado + alt;
-
-
     }
-
-
 
     console.log(`Volumen Disponible: ${volumenDisponible} m3`)
     console.log(`Volumen ocupado: ${volumenOcupado} m3 (${(parseFloat(volumenOcupado / volumenDisponible) * 100).toFixed(2)})%`);
@@ -129,27 +122,33 @@ submitButton.addEventListener("click", () => {
 })
 
 btnAlgorithmJair.addEventListener("click", () => {
-    
+
     //console.log(arr_cubes.arr);
-    arr_cubes.arr.sort((a, b) => ((a.w*a.d)  < (b.w *b.d)  ) ? 1 : -1)
+    arr_cubes.arr.sort((a, b) => ((a.w * a.d) < (b.w * b.d)) ? 1 : -1)
     console.log(arr_cubes.arr);
     for (let i = 0; i < arr_cubes.arr.length; i++) {
-        let cube =  arr_cubes.arr[i];
-        
-        if(tracker.x + cube.w > limits.x){
+        let cube = arr_cubes.arr[i];
+
+        if (tracker.x + cube.w > limits.x) {
             tracker.x = - 10;
-            
-            
-            tracker.z =  jumpLineZ(arr_cubes,tracker.zaux);
-            tracker.z +=0.133;
-            console.log(jumpLineZ(arr_cubes,tracker.zaux));
-
-
+            tracker.z = jumpLineZ(arr_cubes, tracker.zaux);
+            tracker.z += 0.133;
+            console.log("Termino la primera fila");
         }
 
-        arr_cubes.arr[i].setPosition(tracker.x+cube.w/2,cube.h/2,tracker.z+cube.d/2);
-        tracker.x+=(cube.w+0.133);
-        tracker.zaux =  tracker.z+ (cube.d/2)   
+        if(tracker.z >= 10){
+            
+            tracker.y =findSpaceUpLevel(arr_cubes.arr,lastCUBETRACKED);
+            tracker.y = tracker.y + 0.1333;
+            tracker.x = -10;    
+            tracker.z = -10;
+            console.log("Subio de nivel");
+            
+        }
+        arr_cubes.arr[i].setPosition(tracker.x + cube.w / 2, tracker.y+ cube.h / 2, tracker.z + cube.d / 2);
+        lastCUBETRACKED = arr_cubes.arr[i];
+        tracker.x += (cube.w + 0.133);
+        tracker.zaux = tracker.z + (cube.d / 2)
 
     }
 })
