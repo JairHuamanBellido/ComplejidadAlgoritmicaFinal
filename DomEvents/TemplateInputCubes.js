@@ -142,7 +142,7 @@ btnAlgorithmJair.addEventListener("click", () => {
 
 
             console.log("Entrando");
-            tracker.z = jumpLineZ(arr_cubes.arr, tracker.zaux, lastCUBETRACKED);
+            tracker.z = jumpLineZ(arr_cubes.arr, lastCUBETRACKED);
 
 
         }
@@ -162,7 +162,6 @@ btnAlgorithmJair.addEventListener("click", () => {
 
         tracker.x += (cube.w);
 
-        tracker.zaux = tracker.z + (cube.d / 2)
 
     }
     console.log(arr_cubes.arr);
