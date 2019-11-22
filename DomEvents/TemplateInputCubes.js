@@ -1,7 +1,7 @@
 import { ContainerCube } from "../Figuras/Container.js";
 import { Cube } from "../Figuras/Cube.js";
 import escena from "../Figuras/Scene.js";
-import { jumpLineZ, sortByWidthDepth, findSpaceUpLevel } from "./Algorithms.js";
+import { jumpLineZ, sortByWidthDepth, findSpaceUpLevel, jumpLineX } from "./Algorithms.js";
 import { ArrCubes } from "../Models/ArrCubes.js";
 let inputCategory = document.getElementById("numberCategoryCubes");
 let templateInput = document.getElementById("template-input");
@@ -27,6 +27,12 @@ let tracker = {
     y:0,
     zaux: -10
 };
+
+let limitToStart= {
+    x: null,
+    y:null,
+    z:null
+}
 
 let arr_cubes = new ArrCubes();
 
@@ -80,6 +86,9 @@ submitButton.addEventListener("click", () => {
     limits.z = dc / 2;
     limits.y = hc * 2;
 
+    limitToStart.x = -wc / 2; 
+    limitToStart.z = -dc / 2;
+
     tracker.x = -wc / 2;
     tracker.z = -dc / 2;
     tracker.zaux = -dc / 2;
@@ -123,32 +132,32 @@ submitButton.addEventListener("click", () => {
 
 btnAlgorithmJair.addEventListener("click", () => {
 
-    //console.log(arr_cubes.arr);
     arr_cubes.arr.sort((a, b) => ((a.w * a.d) < (b.w * b.d)) ? 1 : -1)
-    console.log(arr_cubes.arr);
     for (let i = 0; i < arr_cubes.arr.length; i++) {
         let cube = arr_cubes.arr[i];
-
+        
         if (tracker.x + cube.w > limits.x) {
-            tracker.x = - 10;
-            tracker.z = jumpLineZ(arr_cubes, tracker.zaux);
-            tracker.z += 0.133;
-            console.log("Termino la primera fila");
+            tracker.x = limitToStart.x;
+            tracker.z = jumpLineZ(arr_cubes.arr, tracker.zaux,lastCUBETRACKED);
+            
         }
-
-        if(tracker.z >= 10){
+        
+        if(tracker.z >= limits.z){
             
             tracker.y =findSpaceUpLevel(arr_cubes.arr,lastCUBETRACKED);
             tracker.y = tracker.y + 0.1333;
-            tracker.x = -10;    
-            tracker.z = -10;
-            console.log("Subio de nivel");
-            
+            tracker.x = limitToStart.x;    
+            tracker.z = limitToStart.z;
+                
         }
         arr_cubes.arr[i].setPosition(tracker.x + cube.w / 2, tracker.y+ cube.h / 2, tracker.z + cube.d / 2);
-        lastCUBETRACKED = arr_cubes.arr[i];
-        tracker.x += (cube.w + 0.133);
-        tracker.zaux = tracker.z + (cube.d / 2)
 
+        lastCUBETRACKED = arr_cubes.arr[i];
+
+        tracker.x += (cube.w );
+
+        tracker.zaux = tracker.z + (cube.d / 2)
+        
     }
+    console.log(arr_cubes.arr);
 })
