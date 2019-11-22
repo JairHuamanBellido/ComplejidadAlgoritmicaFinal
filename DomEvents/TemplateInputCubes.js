@@ -24,14 +24,14 @@ let limits = {
 let tracker = {
     x: -10,
     z: -10,
-    y:0,
+    y: 0,
     zaux: -10
 };
 
-let limitToStart= {
+let limitToStart = {
     x: null,
-    y:null,
-    z:null
+    y: null,
+    z: null
 }
 
 let arr_cubes = new ArrCubes();
@@ -86,13 +86,13 @@ submitButton.addEventListener("click", () => {
     limits.z = dc / 2;
     limits.y = hc * 2;
 
-    limitToStart.x = -wc / 2; 
+    limitToStart.x = -wc / 2;
     limitToStart.z = -dc / 2;
 
     tracker.x = -wc / 2;
     tracker.z = -dc / 2;
     tracker.zaux = -dc / 2;
-
+    x = limitToStart.x;
     for (let i = 0; i < countCategory; i++) {
 
         let parameters = {
@@ -103,10 +103,11 @@ submitButton.addEventListener("click", () => {
             d: parseInt(document.getElementById(`${i}-d`).value)
         }
         for (let j = 0; j < parseInt(parameters.numberCubes); ++j) {
-            
+
 
             let newCube = new Cube(parameters.w, parameters.h, parameters.d, parameters.color);
-            newCube.setPosition(x, parameters.h / 2, 0);
+            
+            newCube.setPosition(x, parameters.h / 2, limitToStart.z);
             escena.add(newCube.getModel());
             arr_cubes.add(newCube);
             x += (parameters.w)
@@ -135,29 +136,34 @@ btnAlgorithmJair.addEventListener("click", () => {
     arr_cubes.arr.sort((a, b) => ((a.w * a.d) < (b.w * b.d)) ? 1 : -1)
     for (let i = 0; i < arr_cubes.arr.length; i++) {
         let cube = arr_cubes.arr[i];
-        
+
         if (tracker.x + cube.w > limits.x) {
             tracker.x = limitToStart.x;
-            tracker.z = jumpLineZ(arr_cubes.arr, tracker.zaux,lastCUBETRACKED);
-            
+
+
+            console.log("Entrando");
+            tracker.z = jumpLineZ(arr_cubes.arr, tracker.zaux, lastCUBETRACKED);
+
+
         }
-        
-        if(tracker.z >= limits.z){
-            
-            tracker.y =findSpaceUpLevel(arr_cubes.arr,lastCUBETRACKED);
+
+        if (tracker.z >= limits.z) {
+
+            tracker.y = findSpaceUpLevel(arr_cubes.arr, lastCUBETRACKED);
             tracker.y = tracker.y + 0.1333;
-            tracker.x = limitToStart.x;    
+            tracker.x = limitToStart.x;
             tracker.z = limitToStart.z;
-                
+
         }
-        arr_cubes.arr[i].setPosition(tracker.x + cube.w / 2, tracker.y+ cube.h / 2, tracker.z + cube.d / 2);
+        arr_cubes.arr[i].setPosition(tracker.x + cube.w / 2, tracker.y + cube.h / 2, tracker.z + cube.d / 2);
 
         lastCUBETRACKED = arr_cubes.arr[i];
 
-        tracker.x += (cube.w );
+
+        tracker.x += (cube.w);
 
         tracker.zaux = tracker.z + (cube.d / 2)
-        
+
     }
     console.log(arr_cubes.arr);
 })
